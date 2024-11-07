@@ -4,7 +4,7 @@ import numpy as np
 def find_lane_pixels(image):
     histogram = np.sum(image[image.shape[0] // 2:, :], axis=0)
     out_img = np.dstack((image, image, image)) * 255
-    midpoint = np.int(histogram.shape[0] // 2)
+    midpoint = int(histogram.shape[0] // 2)
     leftx_base = np.argmax(histogram[:midpoint])
     rightx_base = np.argmax(histogram[midpoint:]) + midpoint
 
@@ -12,7 +12,7 @@ def find_lane_pixels(image):
     margin = 100
     minpix = 50
 
-    window_height = np.int(image.shape[0] // nwindows)
+    window_height = int(image.shape[0] // nwindows)
 
     nonzero = image.nonzero()
     nonzeroy = np.array(nonzero[0])
@@ -49,9 +49,9 @@ def find_lane_pixels(image):
 
         # If you found > minpix pixels, recenter next window on their mean position
         if len(good_left_inds) > minpix:
-            leftx_current = np.int(np.mean(nonzerox[good_left_inds]))
+            leftx_current = int(np.mean(nonzerox[good_left_inds]))
         if len(good_right_inds) > minpix:
-            rightx_current = np.int(np.mean(nonzerox[good_right_inds]))
+            rightx_current = int(np.mean(nonzerox[good_right_inds]))
 
     # Concatenate the arrays of indices (previously was a list of lists of pixels)
     try:
